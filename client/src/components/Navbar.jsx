@@ -10,15 +10,16 @@ const Navbar = () => {
             <h2>Whist Cards</h2>
         </div>
             {/* Links */}
-        <ul className="navbar_links">
-            <li>
+            <ul className="navbar_links">   
+                <li className="fas fa-shopping-cart">
                 <Link to="/cart">
-
+                Cart
+                <span className="cartlogo_badge"> </span>
                 </Link>
             </li>
         </ul>
             {/* Hamburger */}
-
+            
         </nav>
      );
 }
