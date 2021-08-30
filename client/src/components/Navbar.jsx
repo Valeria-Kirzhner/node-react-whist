@@ -9,7 +9,13 @@ const Navbar = () => {
             <h2>Whist Cards</h2>
         </div>
             {/* Links */}
-
+        <ul className="navbar_links">
+            <li>
+                <Link>
+                
+                </Link>
+            </li>
+        </ul>
             {/* Hamburger */}
 
         </nav>
