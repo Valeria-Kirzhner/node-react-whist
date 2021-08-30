@@ -1,9 +1,12 @@
 require("dotenv").config();
 const express = require('express');
-const mongoose = require('mongoose');
-const productRoutes = require("./routes/productRoutes");
-
 const app = express();
+const http = require("http").Server(app);
+const mongoose = require('mongoose');
+const productRoutes = require("./routes/products");
+
+
+const PORT = process.env.PORT || 6000;
 
 mongoose
   .connect(process.env.MONGO_URI, {
@@ -15,9 +18,8 @@ mongoose
 
   app.use(express.json());// make incoming data as json
 
-  app.use("/api/products", productRoutes );
+  app.use("/api/products/", productRoutes );
 
   
 
-const PORT = process.env.PORT || 6000;
 app.listen(PORT, () => console.log(`Server run on port ${PORT}`));

@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const { Product } = require("../models/product");
+const _ = require("lodash");
 
-// GET all products   // api/products
-router.get('/', ( req, res ) => {
+// get all products   // api/products
+router.get('/', async ( req, res ) => {
 
      try {
            const products = await Product.find({});
@@ -16,8 +18,8 @@ router.get('/', ( req, res ) => {
 
 }); 
 
-// GET a single product by id   // api/products/:id
-router.get('/:id', ( req, res ) => {
+// get single product by id   // api/products/:id
+router.get('/:id', async ( req, res ) => {
 
     try { 
         const product = await Product.findById(req.params.id);
@@ -30,5 +32,17 @@ router.get('/:id', ( req, res ) => {
     }
 
 }); 
+
+// create new product
+router.post("/", async (req, res) => {
+  
+    let product = new Product(
+
+        _.pick(req.body, ["title", "description", "price", "imageUrl"])
+        );
+  
+    post = await product.save();
+    res.send(post);
+  });
 
 module.exports = router;
