@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require('express');
 const mongoose = require('mongoose');
+const productRoutes = require("./routes/productRoutes");
 
 const app = express();
 
@@ -12,6 +13,9 @@ mongoose
   .then(() => console.log("Connected to MongoDB..."))
   .catch((err) => console.error("Could not connect to MongoDB..."));
 
+  app.use(express.json());// make incoming data as json
+
+  app.use("/api/products", productRoutes );
 
   
 
