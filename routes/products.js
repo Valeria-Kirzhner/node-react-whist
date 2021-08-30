@@ -3,7 +3,7 @@ const router = express.Router();
 const { Product } = require("../models/product");
 const _ = require("lodash");
 
-// get all products   // api/products
+// get all products  
 router.get('/', async ( req, res ) => {
 
      try {
@@ -18,7 +18,8 @@ router.get('/', async ( req, res ) => {
 
 }); 
 
-// get single product by id   // api/products/:id
+
+// get single product by id   
 router.get('/:id', async ( req, res ) => {
 
     try { 

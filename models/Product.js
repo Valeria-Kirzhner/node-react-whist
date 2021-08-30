@@ -23,9 +23,9 @@ const productSchema = new mongoose.Schema({
         required: true,
         minlength: 11,
         maxlength: 1024,
-      },
+      }
 });
 // here I telling to mongoose how he should recieve the product card, then mongo will call the table as 'product + s'.
-const Product = mongoose.model('product', productSchema);
+const Product = mongoose.model('Product', productSchema);
 
-module.exports = Product;
+exports.Product = Product;
