@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PageHeader from "../common/PageHeader";
 import productService from "../services/productService";
-import Product from "./Product";
+import Product from "./AdminProduct";
 
 class AdminHome extends Component {
 
