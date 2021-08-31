@@ -15,8 +15,7 @@ const Product = ({ product }) => {
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">{product.price} $</li>
                             </ul>
-                    <div className="card-body">
-                        < Link to={`/product/${12334}`} className="info_button" >View</Link>     |
+                    <div className="card-body">  
                         < Link to={`/product/${12334}`} className="info_button" style={{margin: "left 20"}}>Add to Cart</Link>
                     </div>
             </div>

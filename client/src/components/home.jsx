@@ -15,19 +15,14 @@ class Home extends Component {
     console.log(this.state.products);
   }
 
-
   render() {
 
       const { products } = this.state;
 
     return (
 
-
       <div className="container">
-          <PageHeader titleText="All Products" />
-            <div className="col-12 mt-4">
-            </div>
-          
+          <PageHeader titleText="All Products" />     
             <div className="row">
           { products.length > 0 &&
             products.map((product) => (
@@ -37,8 +32,6 @@ class Home extends Component {
               />
             ))}
         </div>
-     
-         
       </div>
     );
   }
