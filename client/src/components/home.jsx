@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PageHeader from "./common/PageHeader";
 import productService from "./services/productService";
+import Product from "./Product";
 
 class Home extends Component {
 
@@ -14,21 +15,30 @@ class Home extends Component {
     console.log(this.state.products);
   }
 
+
   render() {
+
+      const { products } = this.state;
+
     return (
-      <div className="container ">
+
+
+      <div className="container">
           <PageHeader titleText="All Products" />
             <div className="col-12 mt-4">
             </div>
-
+          
             <div className="row">
-              <div className="col-12 mt-4">
-              </div>
-            </div> 
-
-            <div className="row">
-            <div className="col-12"></div>
-          </div>
+          { products.length > 0 &&
+            products.map((product) => (
+              <Product
+                key={product._id}
+                product={product}
+              />
+            ))}
+        </div>
+     
+         
       </div>
     );
   }
