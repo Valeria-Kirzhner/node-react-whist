@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 const AdminProduct = ({ product }) => {
 
@@ -20,9 +21,11 @@ const AdminProduct = ({ product }) => {
       <td>{product.price} $</td>
       <td><img src={product.imageUrl} alt={product.title}  width="100px"/></td>
       <td>
-      <button style={{marginRight: 10}} type="button" className="btn btn-outline-primary">Update</button>
-      
-      <button type="button" className="btn btn-outline-danger">Delete</button>
+      <Link to={`/product/edit/${product._id}`} >
+        <button style={{marginRight: 10}} type="button" className="btn btn-outline-primary">Update</button>
+      </Link>
+                <button type="button" className="btn btn-outline-danger">Delete</button>
+
       </td>
     </tr>
   </tbody>
