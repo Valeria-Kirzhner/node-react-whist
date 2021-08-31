@@ -4,9 +4,13 @@ const app = express();
 const http = require("http").Server(app);
 const mongoose = require('mongoose');
 const productRoutes = require("./routes/products");
+const cors = require("cors");
+
 
 
 const PORT = process.env.PORT || 8000;
+
+
 
 mongoose
   .connect(process.env.MONGO_URI, {
@@ -15,11 +19,12 @@ mongoose
   })
   .then(() => console.log("Connected to MongoDB..."))
   .catch((err) => console.error("Could not connect to MongoDB..."));
+  
+  app.use(cors());
 
   app.use(express.json());// make incoming data as json
 
   app.use("/api/products/", productRoutes );
 
-  
 
 app.listen(PORT, () => console.log(`Server run on port ${PORT}`));
