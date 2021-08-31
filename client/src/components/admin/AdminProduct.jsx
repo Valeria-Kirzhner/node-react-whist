@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 const AdminProduct = ({ product }) => {
 
     return ( 
         <div className="container">
-            <table class="table">
+            <table className="table">
   <thead>
     <tr>
       <th scope="col"># id</th>
@@ -21,7 +20,7 @@ const AdminProduct = ({ product }) => {
       <td>{product.price} $</td>
       <td><img src={product.imageUrl} alt={product.title}  width="100px"/></td>
       <td>
-      <button style={{marginRight : 10}} type="button" className="btn btn-outline-primary">Update</button>
+      <button style={{marginRight: 10}} type="button" className="btn btn-outline-primary">Update</button>
       
       <button type="button" className="btn btn-outline-danger">Delete</button>
       </td>
