@@ -1,8 +1,9 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-axios.defaults.baseURL = "";
+axios.defaults.baseURL = "http://localhost:8000/api";
 
+//this will catch all responses with reject.
 axios.interceptors.response.use(null, (error) => {
     const expectedError = error.response && error.response.status >= 403;
     if (expectedError) toast.error("An unexpected error occurrred.");

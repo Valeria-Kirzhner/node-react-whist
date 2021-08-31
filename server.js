@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const productRoutes = require("./routes/products");
 
 
-const PORT = process.env.PORT || 7000;
+const PORT = process.env.PORT || 8000;
 
 mongoose
   .connect(process.env.MONGO_URI, {
