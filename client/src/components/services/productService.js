@@ -1,13 +1,18 @@
 import http from "./httpService";
 
 
-export function allProducts(card) {
-    return http.get("/products/", card);
-  }
+export function allProducts(product) {
+    return http.get("/products/", product);
+}
+
+export function createProduct(product) {
+    return http.post("/products", product);
+}
 
 const productService = {
 
-  allProducts
+  allProducts,
+  createProduct
 
   };
   
