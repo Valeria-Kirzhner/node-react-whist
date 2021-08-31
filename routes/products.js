@@ -33,6 +33,19 @@ router.get('/:id', async ( req, res ) => {
     }
 
 }); 
+//edit product
+router.put("/:id", async (req, res) => {
+
+    let product = await Product.findOneAndUpdate(
+      { _id: req.params.id },
+      req.body
+    );
+    if (!product)
+      return res.status(404).send("The product with the given id was not found.");
+  
+    product = await Product.findOne({ _id: req.params.id });
+    res.send(product);
+  });
 
 // create new product
 router.post("/", async (req, res) => {
