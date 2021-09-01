@@ -5,18 +5,26 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 class EditCard extends Component {
-  state = {
-    data: {
-      title: "",
-      description: "",
-      price: "",
-      imageUrl: "",
-    },
-    errors: {},
-  };
+
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      
+      data: {
+          title: '',
+          description: '',
+          price: '',
+          imageUrl: ''
+      
+      }
+    };
+
+  }
 
   async componentDidMount() {
     const productId = this.props.match.params.id;
+    console.log(productId);
     const { data } = await productService.getProduct(productId);
     this.setState({ data: this.mapToViewModel(data) });
   }
@@ -31,19 +39,26 @@ class EditCard extends Component {
 
     };
   }
-  changehandler = (event) => {
-         
-    this.setState.data({
-        [event.target.name]: event.target.value,
-    })
- }
 
-  handleSubmit = async () => {
-    const { data } = this.state;
-    //await productService.editProduct(data);
-   // toast("Card is Updated");
-   // this.props.history.replace("/my-cards");
-  };
+    //arrow function ->keeps this in bind
+  handleInputChange = (event)=> {
+
+    const target = event.target;
+    const name = target.name;
+    this.setState(prevState => ({
+      data :{                 // object that I want to update
+        ...prevState.data,     // keep all other key-value pairs
+        [name]: target.value     // update the value of specific key
+      }
+    }))
+  }
+
+  handleSubmit = async (e) => {
+    e.preventDefault();//preventing page reload
+    await productService.updateProduct(this.state);
+    this.props.history.replace("/");
+  
+}
 
   handleCancel = () => {
    // this.props.history.push("/my-cards");
@@ -56,31 +71,33 @@ class EditCard extends Component {
         <div className="row">
           <div className="col-12">
             <p>Fill out product details here</p>
-          </div>
-          
+          </div>    
         </div>
-        <div className="col-lg-6">
-                    <form onSubmit={this.handleSubmit} >
+
+        <div className="row">
+                <div className="col-lg-6">
+                    <form onSubmit={this.handleSubmit} method="POST">
                         <div className="mb-3">
                             <label htmlFor="title" className="title">Title</label>
-                            <input value={this.state.data.title} onChange={this.changehandler} name="title" type="text" className="form-control" id="title" aria-describedby="title"></input>
+                            <input defaultValue={this.state.data.title} onChange={this.handleInputChange} name="title" type="text" className="form-control" id="title" aria-describedby="title"></input>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="description" className="description">Description</label>
-                            <input value={this.state.data.description} onChange={this.changehandler} name="description"  type="text" className="form-control" id="description" aria-describedby="description"></input>
+                            <input defaultValue={this.state.data.description} onChange={this.handleInputChange} name="description"  type="text" className="form-control" id="description" aria-describedby="description"></input>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="price" className="price">Price</label>
-                            <input value={this.state.data.price} onChange={this.changehandler} name="price" type="number" className="form-control" id="price" aria-describedby="price"></input>
+                            <input defaultValue={this.state.data.price} onChange={this.handleInputChange} name="price" type="number" className="form-control" id="price" aria-describedby="price"></input>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="image" className="price">Image url</label>
-                            <input value={this.state.data.imageUrl} onChange={this.changehandler} name="image" type="text" className="form-control" id="image" aria-describedby="image url"></input>
+                            <input  defaultValue={this.state.data.imageUrl} onChange={this.handleInputChange} name="imageUrl" type="text" className="form-control" id="image" aria-describedby="image url"></input>
                         </div>
-                        <button type="submit" className="btn btn-primary">Submit</button>
+                        <input type="submit" className="btn btn-primary" value={'submit'}/>
                     </form>
                 </div>
-            </div>
+            </div>    
+        </div>
     );
   }
 }

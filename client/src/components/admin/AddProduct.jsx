@@ -28,7 +28,7 @@ class AddProduct extends React.Component {
       }
       
       handleSubmit = async (e) => {
-          e.preventDefault();//preventng page reload
+          e.preventDefault();//preventing page reload
           await productService.createProduct(this.state);
           this.props.history.replace("/");
         
