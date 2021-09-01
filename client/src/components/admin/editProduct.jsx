@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PageHeader from "../common/PageHeader";
 import productService from "../services/productService";
-import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 class EditCard extends Component {
@@ -60,10 +59,6 @@ class EditCard extends Component {
   
 }
 
-  handleCancel = () => {
-   // this.props.history.push("/my-cards");
-  };
-
   render() {
     return (
       <div className="container">
@@ -94,6 +89,7 @@ class EditCard extends Component {
                             <input  defaultValue={this.state.data.imageUrl} onChange={this.handleInputChange} name="imageUrl" type="text" className="form-control" id="image" aria-describedby="image url"></input>
                         </div>
                         <input type="submit" className="btn btn-primary" value={'submit'}/>
+                        <Link className="btn btn-secondary ms-2 mt-2" to="/admin">Cancel</Link>
                     </form>
                 </div>
             </div>    
