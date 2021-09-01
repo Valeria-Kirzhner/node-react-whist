@@ -36,7 +36,8 @@ router.get('/:id', async ( req, res ) => {
 //edit product
 router.put("/:id", async (req, res) => {
 
-    let product = await Product.findOneAndUpdate(
+    try {
+        let product = await Product.findOneAndUpdate(
       { _id: req.params.id },
       req.body
     );
@@ -45,6 +46,10 @@ router.put("/:id", async (req, res) => {
   
     product = await Product.findOne({ _id: req.params.id });
     res.send(product);
+    } catch (error) {
+      console.error(error);
+    res.status(500).send("Server error");
+    }
   });
 
 // create new product
