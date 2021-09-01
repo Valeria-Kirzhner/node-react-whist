@@ -21,11 +21,6 @@ class App extends Component {
     if (data.length > 0) this.setState({ products: data });
   }
 
-  setProducts = (id)=>{
-   const updatedProducts = this.state.products.filter((prd)=> prd._id === id)
-   this.setState({products:updatedProducts})
-  }
-
   render() { 
 
     return ( 
@@ -35,7 +30,7 @@ class App extends Component {
        </header>
        <main>
          <Switch >
-         <Route exact path="/" render={(props) => <Home products={this.state.products} setProducts={this.setProducts} {...props} />} />
+         <Route exact path="/" render={(props) => <Home products={this.state.products}  {...props} />} />
          <Route path="/product/add" component={AddProduct}/>
          <Route exact path="/product" component={Product}/>
          <Route exact path="/admin" component={AdminHome}/>
