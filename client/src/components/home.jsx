@@ -5,34 +5,29 @@ import Product from "./Product";
 
 class Home extends Component {
 
-  state = {
-    products: [],
-  };
-
-  async componentDidMount() {
-    const { data } = await productService.allProducts();
-    if (data.length > 0) this.setState({ products: data });
-    console.log(this.state.products);
-  }
-
+ 
+ componentDidUpdate(){
+   console.log(this.props.products);
+   this.props.setProducts('612d24df72d6b841c4ba5151')
+ }
   render() {
 
-      const { products } = this.state;
+     //const { products } = this.state;
 
     return (
-
-      <div className="container">
-          <PageHeader titleText="All Products" />     
-            <div className="row">
-          { products.length > 0 &&
-            products.map((product) => (
-              <Product
-                key={product._id}
-                product={product}
-              />
-            ))}
-        </div>
-      </div>
+<h1>hello</h1>
+      // <div className="container">
+      //     <PageHeader titleText="All Products" />     
+      //       <div className="row">
+      //     { products.length > 0 &&
+      //       products.map((product) => (
+      //         <Product
+      //           key={product._id}
+      //           product={product}
+      //         />
+      //       ))}
+      //   </div>
+      // </div>
     );
   }
 }
