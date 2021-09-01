@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useCart } from 'react-use-cart';
 
 const Product = ({ product }) => {
+
+    const { addItem } = useCart();
 
     return ( 
         <div className="col-md-6 col-lg-4 mt-3">
@@ -16,7 +19,7 @@ const Product = ({ product }) => {
                                 <li className="list-group-item">{product.price} $</li>
                             </ul>
                     <div className="card-body">  
-                        < Link to={`/product/${12334}`} className="info_button" style={{margin: "left 20"}}>Add to Cart</Link>
+                        < button onClick={ () => addItem(product)} className="btn btn-primary" style={{margin: "left 20"}}>Add to Cart</button>
                     </div>
             </div>
         </div>

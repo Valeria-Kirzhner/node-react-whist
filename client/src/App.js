@@ -8,17 +8,37 @@ import EditProduct from "./components/admin/EditProduct";
 import Product from "./components/Product";
 import productService from "./components/services/productService";
 import { Switch, Route } from "react-router-dom";
+import Basket from "./components/common/Basket";
 
 
 class App extends Component {
 
   state = {
     products: [],
+    cartItems: []
   };
 
   async componentDidMount() {
     const { data } = await productService.allProducts();
     if (data.length > 0) this.setState({ products: data });
+  }
+
+  onAddToCart = ( product) => {
+
+    const exist = this.state.cartItems.find(( cartItem ) => cartItem._id ); // check if item is exist in the cart
+
+    if ( exist ) { // if the cart have some item  - add the exist quontety +1 
+
+      this.setState( this.cartItems.map(( cartItem ) => 
+
+         cartItem._id === product._id ? { ...exist , qty: exist.qty + 1 } : cartItem // in case the item in the cartitem id isn't equal to the product id - don't change that, return current item.
+      ));
+
+    } else {// if not exist - create the first one
+
+      this.setState([...cartItems, { ...product, qty:1 }]);
+    }
+    
   }
 
   render() { 
@@ -27,6 +47,7 @@ class App extends Component {
       <React.Fragment>
       <header>
          <Navbar />
+         < Basket products={this.state.cartItems}  />
        </header>
        <main>
          <Switch >
@@ -35,6 +56,7 @@ class App extends Component {
          <Route exact path="/product" component={Product}/>
          <Route exact path="/admin" component={AdminHome}/>
          <Route exact path="/product/edit/:id" component={EditProduct}/>
+         
          </Switch>
        </main>
    </React.Fragment>
