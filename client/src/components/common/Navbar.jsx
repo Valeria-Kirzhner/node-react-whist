@@ -35,7 +35,9 @@ class Navbar extends Component {
                   Statistics
                 </NavLink>
               </li>
-            </ul>
+               </ul>
+
+  
           </div>
         </div>
       </nav>
