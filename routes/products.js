@@ -50,13 +50,21 @@ router.put("/:id", async (req, res) => {
 // create new product
 router.post("/", async (req, res) => {
   
-    let product = new Product(
+  try {
+      let product = new Product(
 
         _.pick(req.body, ["title", "description", "price", "imageUrl"])
         );
   
     post = await product.save();
     res.send(post);
+    
+  } catch (error) {
+
+    console.error(error);
+    res.status(500).send("Server error");
+  }
+  
   });
 
 module.exports = router;
