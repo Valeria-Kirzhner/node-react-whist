@@ -3,17 +3,17 @@ const mongoose = require('mongoose');
 const orderSchema = new mongoose.Schema({
 
     _id: mongoose.Schema.Types.ObjectId,
-    products: {
+    product: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Product',
-        
+        required: true
     },
-    quantety: {
+    quantity: {
         type: Number,
         required: true
     }
 });
-// here I telling to mongoose how he should recieve the product card, then mongo will call the table as 'product + s'.
-const Order = mongoose.model('Order', productSchema);
+// here I telling to mongoose how he should recieve the order, then mongo will call the table as 'order + s'.
+const Order = mongoose.model('Order', orderSchema);
 
-exports.Product = Product;
+exports.Order = Order;
