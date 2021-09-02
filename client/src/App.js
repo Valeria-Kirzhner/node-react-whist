@@ -23,20 +23,20 @@ class App extends Component {
     if (data.length > 0) this.setState({ products: data });
   }
 
-  onAddToCart = ( product) => {
-
-    const exist = this.state.cartItems.find(( cartItem ) => cartItem._id ); // check if item is exist in the cart
-
+  onAddToCart = ( product ) => {
+        
+    const exist = this.state.cartItems.find(( cartItem ) => cartItem._id === product._id ); // check if item is exist in the cart
     if ( exist ) { // if the cart have some item  - add the exist quontety +1 
 
-      this.setState( this.cartItems.map(( cartItem ) => 
+      let foundItem = ( this.state.cartItems.map(( cartItem ) => 
 
          cartItem._id === product._id ? { ...exist , qty: exist.qty + 1 } : cartItem // in case the item in the cartitem id isn't equal to the product id - don't change that, return current item.
       ));
-
+      this.setState({cartItems : foundItem});
+      
     } else {// if not exist - create the first one
-
-      this.setState([...cartItems, { ...product, qty:1 }]);
+      console.log('inn');
+      this.setState({...this.state.cartItems}, { ...product, qty:1 });
     }
     
   }
@@ -47,11 +47,11 @@ class App extends Component {
       <React.Fragment>
       <header>
          <Navbar />
-         < Basket products={this.state.cartItems}  />
+         < Basket onAddToCart={this.onAddToCart} cartItems={this.state.cartItems}  />
        </header>
        <main>
          <Switch >
-         <Route exact path="/" render={(props) => <Home products={this.state.products}  {...props} />} />
+         <Route exact path="/" render={(props) => <Home products={this.state.products} onAddToCart={this.onAddToCart} {...props} />} />
          <Route path="/product/add" component={AddProduct}/>
          <Route exact path="/product" component={Product}/>
          <Route exact path="/admin" component={AdminHome}/>

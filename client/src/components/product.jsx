@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useCart } from 'react-use-cart';
+//import { useCart } from 'react-use-cart';
 
-const Product = ({ product }) => {
+const Product = ({ product , onAddToCart }) => {
 
-    const { addItem } = useCart();
+    //const { addItem } = useCart();
+   // const { onAddToCart } = this.props;
 
     return ( 
         <div className="col-md-6 col-lg-4 mt-3">
@@ -19,7 +19,7 @@ const Product = ({ product }) => {
                                 <li className="list-group-item">{product.price} $</li>
                             </ul>
                     <div className="card-body">  
-                        < button onClick={ () => addItem(product)} className="btn btn-primary" style={{margin: "left 20"}}>Add to Cart</button>
+                        < button onClick={() => onAddToCart( product )} className="btn btn-primary" style={{margin: "left 20"}}>Add to Cart</button>
                     </div>
             </div>
         </div>
