@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 const Basket =({cartItems , onAddToCart , onRemoveFromCart})=> {
 
 const [ show, setShow ] = useState(false);
+const itemsPrice = cartItems.reduce( (a,c) => a + c.price * c.qty, 0); // I use reduce function in cart items, it accepts 2 param - a (acamulator) , c (current item). The difault value of acamulator is 0.
 
     return (  
             
@@ -11,8 +12,8 @@ const [ show, setShow ] = useState(false);
             <div className="col align-self-start"></div>
                 <div className="col align-self-center"></div>
 
-                        <div className="col align-self-end"> 
-                        <button onClick={ () => setShow(!show)}> <img src={"https://icon-library.com/images/cart-icon/cart-icon-16.jpg"} alt="cart" style={{ width: "50px", height:"50px"}}  /></button>       
+                    <div className="col align-self-end"> 
+                    <button onClick={ () => setShow(!show)}> <img src={"https://icon-library.com/images/cart-icon/cart-icon-16.jpg"} alt="cart" style={{ width: "50px", height:"50px"}}  /></button>       
                         {
                             show ?
                         
@@ -36,12 +37,22 @@ const [ show, setShow ] = useState(false);
                                         </div>
                                     </div>  
                                 )}
+                            {cartItems.length !== 0 && (// only if the sum items is greater than 0
+                                <div>
+                                    <hr></hr>
+                                    <div className="row">
+                                        <div className=""><strong>Total price</strong></div>
+                                        <div>${itemsPrice}</div>
 
-                           
-                     </div>
+                                    </div>
+                                </div>
 
-                              : null  }
-                </div>
+                            )}
+
+                         </div>
+
+                    : null  }
+            </div>
         </div>
     </div>
 
