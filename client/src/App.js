@@ -49,9 +49,10 @@ const onAddToCart = ( product ) => {
       <React.Fragment>
       <header>
          <Navbar />
-         < Basket onAddToCart={onAddToCart} cartItems={cartItems}  />
        </header>
-       <main>
+       <main >
+        < Basket onAddToCart={onAddToCart} cartItems={cartItems} />
+
          <Switch >
          <Route exact path="/" render={(props) => <Home products={products} onAddToCart={onAddToCart} {...props} />} />
          <Route path="/product/add" component={AddProduct}/>

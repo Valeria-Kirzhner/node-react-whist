@@ -1,50 +1,55 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
-class Basket extends Component {
-    state = {  }
-    render() { 
+const Basket =({cartItems , onAddToCart , onRemoveFromCart})=> {
 
-        const { cartItems , onAddToCart , onRemoveFromCart} = this.props;
+const [ show, setShow ] = useState(false);
+
+      
 
         return (  
-            <div className="row">
-                <img className="col-md-4 " style={{ width:"80px", height:"60px", position: 'absolute', right: 50, top: 50}}  src={"https://mk0fullcartlee7r2lc4.kinstacdn.com/images/fc-logo-circle.png"} alt="cart" />
-            <div>
-                {cartItems.length === 0 && <div> Cart is empty</div>}
-                
-                { cartItems.map(( item ) => 
-                <div>
-                            <h2>
-                            Cart Items
-                             </h2>
-
-                    <div key={ item._id } className="row">
             
+     <div className="container">
+        <div className="row">
+             <div className="row">
+                 <div className="col align-self-start"></div>
+                    <div className="col align-self-center"></div>
+                        <div className="col align-self-end"> 
+                        <button onClick={ () => setShow(!show)}> <img src={"https://icon-library.com/images/cart-icon/cart-icon-16.jpg"} alt="cart" style={{ width: "50px", height:"50px"}}  /></button>
+                        
+                        {
+                            show ?
+                        
+                        <div className="card" style={{width: "18rem" }}>
+                        <div className="card-header"> </div>
 
-                        <div className="col-2">{item.title}</div>
+                      
+                        {cartItems.length === 0 && <div className="card-header" >Cart is empty</div>}
+                            <ul className="list-group list-group-flush" >      
+                                { cartItems.map(( item ) => 
+                                    <div  key={ item._id } >
+                                        <li className="list-group-item">{item.title}
+                                            <div className=".col-md-3 .ml-md-auto">
+                                                <button onClick={() => onAddToCart( item ) } className="btn ">
+                                                        +
+                                                </button>
+                                                <button onClick={() => onRemoveFromCart( item )} className="btn ">
+                                                        -
+                                                </button>
+                                            </div> 
+                                        </li>
+                                    </div>  
+                                )}
+                            </ul>
+                     </div>
 
-                            <div className="col-2">
-                                <button onClick={() => onAddToCart( item ) } className="btn btn-primary ">
-                                 +
-                                </button>
-                                <button onClick={() => onRemoveFromCart( item )} className="btn btn-primary">
-                                -
-                                </button>
-                           </div> 
-
-                    <div className="col-2 text-right"> {item.qty} X $ {item.price.toFixed(2)}</div>
-
-                    </div>
-                 </div>
-                )};
-                
+                              : null  }
+                </div>
             </div>
-
         </div>
+    </div>
 
 
         );
     }
-}
  
 export default Basket;
