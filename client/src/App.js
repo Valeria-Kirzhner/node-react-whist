@@ -65,7 +65,7 @@ const onAddToCart = ( product ) => {
     return ( 
       <React.Fragment>
       <header>
-         <Navbar />
+         <Navbar countCartItems={cartItems.length} />
        </header>
        <main >
         < Basket onAddToCart={onAddToCart} cartItems={cartItems} onRemoveFromCart={onRemoveFromCart} />

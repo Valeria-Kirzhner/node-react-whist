@@ -3,9 +3,14 @@ import { NavLink, Link } from "react-router-dom";
 
 class Navbar extends Component {
 
+
   state = {};
 
   render() {
+
+  const {countCartItems} = this.props;
+
+
     return (
       <nav className="navbar navbar-expand-lg navbar-light shadow-sm">
         <div className="container">
@@ -36,8 +41,6 @@ class Navbar extends Component {
                 </NavLink>
               </li>
                </ul>
-
-  
           </div>
         </div>
       </nav>
