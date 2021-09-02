@@ -11,14 +11,14 @@ import { Switch, Route } from "react-router-dom";
 import Basket from "./components/common/Basket";
 
 
-const  App = () => {
+const App = () => {
 
   const [products,setProducts] = useState([]);
   const [cartItems,setCartItems] = useState([]);
 
   useEffect(()=>{
     fetchData();
-  },[])
+  },[products])
 
 // get all products
   const fetchData = async ()=>{
@@ -26,10 +26,9 @@ const  App = () => {
     if (data.length > 0)  setProducts(data);
   }
 
-
 const onAddToCart = ( product ) => {
-    const exist = cartItems.find(( cartItem ) => cartItem._id === product._id ); // check if item is exist in the cart
 
+    const exist = cartItems.find(( cartItem ) => cartItem._id === product._id ); // check if item is exist in the cart
     if ( exist ) { // if the cart have some item  - add the exist quontety +1 
 
       setCartItems( 
@@ -37,15 +36,10 @@ const onAddToCart = ( product ) => {
          cartItem._id === product._id ? { ...exist , qty: exist.qty + 1 } : cartItem // in case the item in the cartitem id isn't equal to the product id - don't change that, return current item.
       ));
 
-
     } else {// if not exist - create the first one
 
       setCartItems([...cartItems, { ...product, qty:1 }]);
-  
-
     }
-    
-
   }
   const onRemoveFromCart = ( product ) => {
 
@@ -58,8 +52,6 @@ const onAddToCart = ( product ) => {
          cartItem._id === product._id ? { ...exist , qty: exist.qty - 1 } : cartItem 
       ));
     }
-
-
   }
 
     return ( 
@@ -74,7 +66,7 @@ const onAddToCart = ( product ) => {
          <Route exact path="/" render={(props) => <Home products={products} onAddToCart={onAddToCart} {...props} />} />
          <Route path="/product/add" component={AddProduct}/>
          <Route exact path="/product" component={Product}/>
-         <Route exact path="/admin" component={AdminHome}/>
+         <Route exact path="/admin" render={(props) => <AdminHome products={products} onAddToCart={onAddToCart} {...props} />} />
          <Route exact path="/product/edit/:id" component={EditProduct}/>
          
          </Switch>

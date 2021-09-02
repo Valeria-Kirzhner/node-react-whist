@@ -1,15 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import PageHeader from "./common/PageHeader";
 import Product from "./Product";
 
-class Home extends Component {
+const Home = ({ products , onAddToCart}) => {
 
-
-  render() {
-
-    const {products, onAddToCart } = this.props;
-
-    return products.length > 0 && (
+    return  products.length > 0 && (
 
       <div className="container">
            <PageHeader titleText="All Products" />     
@@ -25,7 +20,7 @@ class Home extends Component {
         </div>
        </div>
     );
-  }
+  
 }
 
 export default Home;

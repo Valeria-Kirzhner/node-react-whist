@@ -45,8 +45,14 @@ const itemsPrice = cartItems.reduce( (a,c) => a + c.price * c.qty, 0); // I use 
                                         <div className=""><strong>Total price</strong></div>
                                         <div>${itemsPrice}</div>
 
+                                        </div>
+                                    <div className="row" >
+                                        <button onClick={ () => alert('pay')}>Pay</button>
+
                                     </div>
+                             
                                 </div>
+                                
 
                             )}
 
