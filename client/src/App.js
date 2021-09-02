@@ -11,15 +11,16 @@ import { Switch, Route } from "react-router-dom";
 import Basket from "./components/common/Basket";
 
 
-const  App = ()=> {
+const  App = () => {
 
   const [products,setProducts] = useState([]);
-  const [cartItems,setcartItems] = useState([]);
+  const [cartItems,setCartItems] = useState([]);
 
   useEffect(()=>{
     fetchData();
   },[])
 
+// get all products
   const fetchData = async ()=>{
     const { data } = await productService.allProducts();
     if (data.length > 0)  setProducts(data);
@@ -27,22 +28,38 @@ const  App = ()=> {
 
 
 const onAddToCart = ( product ) => {
-        
     const exist = cartItems.find(( cartItem ) => cartItem._id === product._id ); // check if item is exist in the cart
+
     if ( exist ) { // if the cart have some item  - add the exist quontety +1 
 
-      setcartItems( cartItems.map(( cartItem ) => 
-
+      setCartItems( 
+        cartItems.map(( cartItem ) => 
          cartItem._id === product._id ? { ...exist , qty: exist.qty + 1 } : cartItem // in case the item in the cartitem id isn't equal to the product id - don't change that, return current item.
       ));
 
-      
 
-      
     } else {// if not exist - create the first one
-      setcartItems([{cartItems}, { ...product, qty:1 }]);
+
+      setCartItems([...cartItems, { ...product, qty:1 }]);
+  
+
     }
     
+
+  }
+  const onRemoveFromCart = ( product ) => {
+
+    const exist = cartItems.find(( cartItem ) => cartItem._id === product._id ); 
+    if (exist.qty === 1){ // if there is exist one product 
+      setCartItems( cartItems.filter( (cartItem) => cartItem._id !== product._id ));
+    } else {
+      setCartItems( 
+        cartItems.map(( cartItem ) => 
+         cartItem._id === product._id ? { ...exist , qty: exist.qty - 1 } : cartItem 
+      ));
+    }
+
+
   }
 
     return ( 
@@ -51,7 +68,7 @@ const onAddToCart = ( product ) => {
          <Navbar />
        </header>
        <main >
-        < Basket onAddToCart={onAddToCart} cartItems={cartItems} />
+        < Basket onAddToCart={onAddToCart} cartItems={cartItems} onRemoveFromCart={onRemoveFromCart} />
 
          <Switch >
          <Route exact path="/" render={(props) => <Home products={products} onAddToCart={onAddToCart} {...props} />} />
