@@ -9,7 +9,7 @@ router.post("/", async (req, res) => {
      let order = new Order({
             _id: mongoose.Types.ObjectId(),
             quantity: req.body.quantity,
-            product: req.body.productId,
+            products: req.body.productId,
         });      
       order
         .save()
