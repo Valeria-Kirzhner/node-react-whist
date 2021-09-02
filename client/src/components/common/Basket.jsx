@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 
-const Basket =({cartItems , onAddToCart , onRemoveFromCart})=> {
+const Basket =({cartItems , onAddToCart , onRemoveFromCart, countCartItems})=> {
 
-const {countCartItems} = this.props;
 const [ show, setShow ] = useState(false);
 const itemsPrice = cartItems.reduce( (a,c) => a + c.price * c.qty, 0); // I use reduce function in cart items, it accepts 2 param - a (acamulator) , c (current item). The difault value of acamulator is 0.
 

@@ -65,10 +65,10 @@ const onAddToCart = ( product ) => {
     return ( 
       <React.Fragment>
       <header>
-         <Navbar countCartItems={cartItems.length} />
+         <Navbar />
        </header>
        <main >
-        < Basket onAddToCart={onAddToCart} cartItems={cartItems} onRemoveFromCart={onRemoveFromCart} />
+        < Basket onAddToCart={onAddToCart} cartItems={cartItems} onRemoveFromCart={onRemoveFromCart} countCartItems={cartItems.length} />
 
          <Switch >
          <Route exact path="/" render={(props) => <Home products={products} onAddToCart={onAddToCart} {...props} />} />
