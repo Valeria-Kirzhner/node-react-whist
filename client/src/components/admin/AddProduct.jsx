@@ -1,6 +1,8 @@
 import * as React from 'react';
 import PageHeader from "../common/PageHeader";
 import productService from "../services/productService";
+import { Link } from "react-router-dom";
+
 
 
 class AddProduct extends React.Component {
@@ -67,6 +69,7 @@ class AddProduct extends React.Component {
                             <input  value={this.state.imageUrl} onChange={this.handleInputChange} name="imageUrl" type="text" className="form-control" id="image" aria-describedby="image url"></input>
                         </div>
                         <input type="submit" className="btn btn-primary" value={'submit'}/>
+                        <Link className="btn btn-secondary ms-2 mt-2" to="/admin">Cancel</Link>
                     </form>
                 </div>
             </div>
