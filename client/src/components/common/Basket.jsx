@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
+import orderService from "../services/orderService";
 
 const Basket =({cartItems , onAddToCart , onRemoveFromCart, countCartItems})=> {
 
-const [ show, setShow ] = useState(false);
+const [ show, setShow ] = useState(false);// toggle button cart
 const itemsPrice = cartItems.reduce( (a,c) => a + c.price * c.qty, 0); // I use reduce function in cart items, it accepts 2 param - a (acamulator) , c (current item). The difault value of acamulator is 0.
+
+    async function onPay () {
+
+        localStorage.setItem("orderList", JSON.stringify(cartItems));
+         await orderService.createOrder();
+        //this.props.history.replace("/");
+
+    }
 
     return (  
             
@@ -47,7 +56,7 @@ const itemsPrice = cartItems.reduce( (a,c) => a + c.price * c.qty, 0); // I use 
 
                                         </div>
                                     <div className="row" >
-                                        <button onClick={ () => alert('pay')}>Pay</button>
+                                        <button onClick={ () => onPay()}>Pay</button>
 
                                     </div>
                              
