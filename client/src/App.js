@@ -16,15 +16,18 @@ const App = () => {
   const [products,setProducts] = useState([]);
   const [cartItems,setCartItems] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
+  
+    const fetchData = async ()=>{
+      const { data } = await productService.allProducts();
+      if (data.length > 0)  setProducts(data);
+    }
+
     fetchData();
-  },[products])
+  }, []); 
 
 // get all products
-  const fetchData = async ()=>{
-    const { data } = await productService.allProducts();
-    if (data.length > 0)  setProducts(data);
-  }
+  
 
 const onAddToCart = ( product ) => {
 
@@ -54,6 +57,16 @@ const onAddToCart = ( product ) => {
     }
   }
 
+const editProduct  = (updatedProduct)=> {
+  const updatedProducts = products.map((prd)=> prd._id === updatedProduct._id ? updatedProduct : prd)
+  setProducts(updatedProducts)
+}
+
+const addProduct  = (newProduct)=> {
+  const updatedProducts = [...products, newProduct]
+  setProducts(updatedProducts.reverse())
+}
+
     return ( 
       <React.Fragment>
       <header>
@@ -64,10 +77,10 @@ const onAddToCart = ( product ) => {
 
          <Switch >
          <Route exact path="/" render={(props) => <Home products={products} onAddToCart={onAddToCart} {...props} />} />
-         <Route path="/product/add" component={AddProduct}/>
+         <Route path="/product/add"render={(props) => <AddProduct addProduct={addProduct} {...props}/>}/>
          <Route exact path="/product" component={Product}/>
          <Route exact path="/admin" render={(props) => <AdminHome products={products} onAddToCart={onAddToCart} {...props} />} />
-         <Route exact path="/product/edit/:id" component={EditProduct}/>
+         <Route exact path="/product/edit/:id" render={(props) => <EditProduct editProduct={editProduct} {...props}/>}  />
          
          </Switch>
        </main>
