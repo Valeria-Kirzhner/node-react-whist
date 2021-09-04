@@ -63,20 +63,15 @@ const addProduct  = (newProduct)=> {
   const updatedProducts = [newProduct, ...products]
   setProducts(updatedProducts)
 }
-const clearBasket = () => {
-  setCartItems([]);
-}
 
 const onPay = async (totalSum) => {
   totalSum = {'totalSum': totalSum};
   const total = {
-    totalSum,
+                  totalSum,
                   orderItems:[...cartItems]
                 };
   await orderService.createOrder(total);
- //  clearBasket();
-  // setShow(false);
-
+  setCartItems([]);
 }
 
     return ( 
@@ -85,7 +80,7 @@ const onPay = async (totalSum) => {
          <Navbar />
        </header>
        <main >
-        < Basket onAddToCart={onAddToCart} onPay={onPay} clearBasket={clearBasket} cartItems={cartItems} onRemoveFromCart={onRemoveFromCart} countCartItems={cartItems.length} />
+        < Basket onAddToCart={onAddToCart} onPay={onPay} cartItems={cartItems} onRemoveFromCart={onRemoveFromCart} countCartItems={cartItems.length} />
 
          <Switch >
          <Route exact path="/" render={(props) => <Home products={products} onAddToCart={onAddToCart} {...props} />} />

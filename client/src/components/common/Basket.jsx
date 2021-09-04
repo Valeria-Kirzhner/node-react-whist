@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Basket =({cartItems , onAddToCart , onRemoveFromCart, countCartItems,clearBasket, onPay })=> {
+const Basket =({cartItems , onAddToCart , onRemoveFromCart, countCartItems, onPay })=> {
 
 const [ show, setShow ] = useState(false);// toggle button cart
 const totalSum = cartItems.reduce( (a,c) => a + c.price * c.qty, 0); // I use reduce function in cart items, it accepts 2 param - a (acamulator) , c (current item). The difault value of acamulator is 0.
@@ -47,7 +47,7 @@ const totalSum = cartItems.reduce( (a,c) => a + c.price * c.qty, 0); // I use re
 
                                         </div>
                                     <div className="row" >
-                                        <button onClick={ () => onPay(totalSum)}>Pay</button>
+                                        <button onClick={ () => onPay(totalSum) && setShow(false)}>Pay</button>
 
                                     </div>
                              
