@@ -32,7 +32,7 @@ class Navbar extends Component {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-item nav-link" to="/Stat">
+                <NavLink className="nav-item nav-link" to="/stats">
                   Statistics
                 </NavLink>
               </li>
