@@ -5,6 +5,7 @@ const http = require("http").Server(app);
 const mongoose = require('mongoose');
 const productRoutes = require("./routes/products");
 const orderRoutes = require("./routes/orders");
+const orderRoutes = require("./routes/stats");
 const cors = require("cors");
 
 const PORT = process.env.PORT || 5500;
@@ -23,7 +24,6 @@ mongoose
 
   app.use("/api/products/", productRoutes );
   app.use("/api/orders/", orderRoutes );
-
-
+  app.use("/api/stats/", statsRoutes );
 
 app.listen(PORT, () => console.log(`Server run on port ${PORT}`));
