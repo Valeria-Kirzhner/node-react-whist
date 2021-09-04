@@ -4,24 +4,28 @@ const { Order } = require("../models/order");
 const _ = require("lodash");
 const mongoose = require('mongoose');
 
+
 router.post("/", async (req, res) => {
 
-     let order = new Order({
-            _id: mongoose.Types.ObjectId(),
-            quantity: req.body.quantity,
-            products: req.body.productId,
-        });      
-      order
-        .save()
-        .then( result => {console.log(result);
-        res.status(201).send(result);
-        })
-        .catch( err => {
-            console.log(err);
-            res.status(500).send(err);
+         const order = new Order({
+          _id: mongoose.Types.ObjectId(),
+          orderItems: req.body,
+          //itemsPrice: req.body.itemsPrice,
+          //totalPrice: req.body.totalPrice,
         });
-    
+
+        try{
+        const createdOrder = await order.save();
+        res
+          .status(201)
+          .send({ message: 'New Order Created', order: createdOrder });
+        } catch (err){
+          console.error(err)
+        }
+      
     });
+    
+
 
 
 module.exports = router;
