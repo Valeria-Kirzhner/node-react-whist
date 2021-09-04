@@ -15,13 +15,33 @@ router.get('/top-products', async ( req, res ) => {
       },
         {   $group: {
                     _id : "$orderItems._id" , 
-                     total: {$sum: "$orderItems.qty"}, 
+                     total: {$sum: "$orderItems.qty"},  // count the quantities
                      title: { $first: "$orderItems.title"},
-                     count: { $sum: 1 }
+                     count: { $sum: 1 }// count the number of the orders
                     }
                   },
-                    { $limit : 5 } ])
-                    .sort({total :-1})
+                    { $limit : 5 }
+                   ]).sort({total :-1})
+
+        res.send(test);
+       
+ } catch ( error ) {
+     console.error(error);
+     res.status(500).send("Server error");
+ }
+}); 
+//
+router.get('/last-orders', async ( req, res ) => {
+  try {
+
+      const test = await Order.find(
+        {
+            "date": 
+            {
+                $gte: new Date((new Date().getTime() - (5 * 24 * 60 * 60 * 1000)))
+            }
+        }
+        ).sort({ "date": -1 })
 
         res.send(test);
        
