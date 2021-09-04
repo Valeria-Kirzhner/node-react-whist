@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import AdminHome from "./components/admin/AdminHome";
 import EditProduct from "./components/admin/EditProduct";
 import Product from "./components/Product";
+import StatHome from "./components/stats/StatHome";
 import productService from "./components/services/productService";
 import { Switch, Route } from "react-router-dom";
 import Basket from "./components/common/Basket";
@@ -84,7 +85,7 @@ const clearBasket = () => {
          <Route exact path="/product" component={Product}/>
          <Route exact path="/admin" render={(props) => <AdminHome products={products} onAddToCart={onAddToCart} {...props} />} />
          <Route exact path="/product/edit/:id" render={(props) => <EditProduct editProduct={editProduct} {...props}/>}  />
-         
+         <Route exact path="/stats" component={StatHome} />
          </Switch>
        </main>
    </React.Fragment>
