@@ -9,8 +9,7 @@ router.post("/", async (req, res) => {
          const order = new Order({
           _id: mongoose.Types.ObjectId(),
           orderItems: req.body,
-          //itemsPrice: req.body.itemsPrice,
-          //totalPrice: req.body.totalPrice,
+          totalSum: req.body.totalSum,
         });
 
         try{
