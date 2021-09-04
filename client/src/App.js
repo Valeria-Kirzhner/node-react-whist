@@ -18,17 +18,13 @@ const App = () => {
   const [cartItems,setCartItems] = useState([]);
 
   useEffect(() => {
-  
-    const fetchData = async ()=>{
+
+    const fetchData = async ()=>{// get all products
       const { data } = await productService.allProducts();
       if (data.length > 0)  setProducts(data);
     }
-
     fetchData();
   }, []); 
-
-// get all products
-  
 
 const onAddToCart = ( product ) => {
 
@@ -39,14 +35,13 @@ const onAddToCart = ( product ) => {
         cartItems.map(( cartItem ) => 
          cartItem._id === product._id ? { ...exist , qty: exist.qty + 1 } : cartItem // in case the item in the cartitem id isn't equal to the product id - don't change that, return current item.
       ));
-
+      
     } else {// if not exist - create the first one
-
       setCartItems([...cartItems, { ...product, qty:1 }]);
     }
   }
-  const onRemoveFromCart = ( product ) => {
 
+  const onRemoveFromCart = ( product ) => {
     const exist = cartItems.find(( cartItem ) => cartItem._id === product._id ); 
     if (exist.qty === 1){ // if there is exist one product 
       setCartItems( cartItems.filter( (cartItem) => cartItem._id !== product._id ));
