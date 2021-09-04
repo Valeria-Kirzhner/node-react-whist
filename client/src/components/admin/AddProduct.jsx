@@ -1,43 +1,33 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import PageHeader from "../common/PageHeader";
 import productService from "../services/productService";
 import { Link } from "react-router-dom";
 
 
 
-class AddProduct extends React.Component {
+const AddProduct = ({history,addProduct})=>{
 
-
-    constructor(props) {
-        super(props);
-        this.state = {
-          title: '',
-          description: '',
-          price: '',
-          imageUrl: ''
-        };
-    
-      }
-    
+    const [allValues, setAllValues] = useState({
+        title: '',
+        description: '',
+        price: '',
+        imageUrl: '',
+     });
+   
       //arrow function ->keeps this in bind
-      handleInputChange = (event)=> {
-        const target = event.target;
-        const name = target.name;
-    
-        this.setState({
-          [name]: target.value
-        });
+   const handleInputChange = (e)=> {
+    setAllValues({...allValues, [e.target.name]: e.target.value})
+
       }
       
-      handleSubmit = async (e) => {
+   const handleSubmit = async (e) => {
           e.preventDefault();//preventing page reload
-          await productService.createProduct(this.state);
-          this.props.history.replace("/");
+        const {data} =await productService.createProduct(allValues);
+          addProduct(data)
+          history.replace("/");
         
       }
 
-     render(){
- 
 
         return ( 
 
@@ -51,22 +41,22 @@ class AddProduct extends React.Component {
 
             <div className="row">
                 <div className="col-lg-6">
-                    <form onSubmit={this.handleSubmit} method="POST">
+                    <form onSubmit={handleSubmit} method="POST">
                         <div className="mb-3">
                             <label htmlFor="title" className="title">Title</label>
-                            <input value={this.state.title} onChange={this.handleInputChange} name="title" type="text" className="form-control" id="title" aria-describedby="title"></input>
+                            <input value={allValues.title} onChange={handleInputChange} name="title" type="text" className="form-control" id="title" aria-describedby="title"></input>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="description" className="description">Description</label>
-                            <input value={this.state.description} onChange={this.handleInputChange} name="description"  type="text" className="form-control" id="description" aria-describedby="description"></input>
+                            <input value={allValues.description} onChange={handleInputChange} name="description"  type="text" className="form-control" id="description" aria-describedby="description"></input>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="price" className="price">Price</label>
-                            <input value={this.state.price} onChange={this.handleInputChange} name="price" type="number" className="form-control" id="price" aria-describedby="price"></input>
+                            <input value={allValues.price}  onChange={handleInputChange} name="price" type="number" className="form-control" id="price" aria-describedby="price"></input>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="image" className="price">Image url</label>
-                            <input  value={this.state.imageUrl} onChange={this.handleInputChange} name="imageUrl" type="text" className="form-control" id="image" aria-describedby="image url"></input>
+                            <input value={allValues.imageUrl} onChange={handleInputChange} name="imageUrl" type="text" className="form-control" id="image" aria-describedby="image url"></input>
                         </div>
                         <input type="submit" className="btn btn-primary" value={'submit'}/>
                         <Link className="btn btn-secondary ms-2 mt-2" to="/admin">Cancel</Link>
@@ -78,5 +68,4 @@ class AddProduct extends React.Component {
          );
         }
     
-}
 export default AddProduct;
