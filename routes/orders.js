@@ -4,7 +4,6 @@ const { Order } = require("../models/order");
 const _ = require("lodash");
 const mongoose = require('mongoose');
 
-
 router.post("/", async (req, res) => {
 
          const order = new Order({

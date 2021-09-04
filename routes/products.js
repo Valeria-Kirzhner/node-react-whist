@@ -18,7 +18,6 @@ router.get('/', async ( req, res ) => {
 
 }); 
 
-
 // get single product by id   
 router.get('/:id', async ( req, res ) => {
 

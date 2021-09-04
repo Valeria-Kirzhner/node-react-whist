@@ -63,8 +63,11 @@ const editProduct  = (updatedProduct)=> {
 }
 
 const addProduct  = (newProduct)=> {
-  const updatedProducts = [...products, newProduct]
-  setProducts(updatedProducts.reverse())
+  const updatedProducts = [newProduct, ...products]
+  setProducts(updatedProducts)
+}
+const clearBasket = () => {
+  setCartItems([]);
 }
 
     return ( 
@@ -73,7 +76,7 @@ const addProduct  = (newProduct)=> {
          <Navbar />
        </header>
        <main >
-        < Basket onAddToCart={onAddToCart} cartItems={cartItems} onRemoveFromCart={onRemoveFromCart} countCartItems={cartItems.length} />
+        < Basket onAddToCart={onAddToCart} clearBasket={clearBasket} cartItems={cartItems} onRemoveFromCart={onRemoveFromCart} countCartItems={cartItems.length} />
 
          <Switch >
          <Route exact path="/" render={(props) => <Home products={products} onAddToCart={onAddToCart} {...props} />} />
