@@ -5,7 +5,7 @@ const http = require("http").Server(app);
 const mongoose = require('mongoose');
 const productRoutes = require("./routes/products");
 const orderRoutes = require("./routes/orders");
-const orderRoutes = require("./routes/stats");
+const statsRoutes = require("./routes/stats");
 const cors = require("cors");
 
 const PORT = process.env.PORT || 5500;
