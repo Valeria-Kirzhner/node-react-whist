@@ -10,9 +10,9 @@ const Home = ({ products , onAddToCart}) => {
            <PageHeader titleText="All Products" />     
        <div className="row">
           { 
-            products.map((product) => (
+            products.map((product,index) => (
               <Product
-                key={product._id}
+                key={index}
                   product={product}
                   onAddToCart={ onAddToCart }
                 />
