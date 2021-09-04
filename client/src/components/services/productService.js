@@ -4,8 +4,8 @@ export function getProduct(productId) {
     return http.get(`/products/${productId}`);
   }
 
-export function allProducts(product) {
-    return http.get("/products/", product);
+export function allProducts() {
+    return http.get("/products/");
 }
 
 export function createProduct(product) {
