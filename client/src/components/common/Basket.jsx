@@ -1,17 +1,9 @@
 import React, { useState } from 'react';
-import orderService from "../services/orderService";
 
-const Basket =({cartItems , onAddToCart , onRemoveFromCart, countCartItems,clearBasket})=> {
+const Basket =({cartItems , onAddToCart , onRemoveFromCart, countCartItems,clearBasket, onPay })=> {
 
 const [ show, setShow ] = useState(false);// toggle button cart
-const itemsPrice = cartItems.reduce( (a,c) => a + c.price * c.qty, 0); // I use reduce function in cart items, it accepts 2 param - a (acamulator) , c (current item). The difault value of acamulator is 0.
-
-    const onPay = async () => {
-         await orderService.createOrder(cartItems);
-         clearBasket();
-         setShow(false);
-
-    }
+const totalSum = cartItems.reduce( (a,c) => a + c.price * c.qty, 0); // I use reduce function in cart items, it accepts 2 param - a (acamulator) , c (current item). The difault value of acamulator is 0.
 
     return (  
             
@@ -51,11 +43,11 @@ const itemsPrice = cartItems.reduce( (a,c) => a + c.price * c.qty, 0); // I use 
                                     <hr></hr>
                                     <div className="row">
                                         <div className=""><strong>Total price</strong></div>
-                                        <div>${itemsPrice}</div>
+                                        <div>${totalSum}</div>
 
                                         </div>
                                     <div className="row" >
-                                        <button onClick={ () => onPay()}>Pay</button>
+                                        <button onClick={ () => onPay(totalSum)}>Pay</button>
 
                                     </div>
                              

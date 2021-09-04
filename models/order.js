@@ -14,7 +14,8 @@ const orderSchema = new mongoose.Schema({
         _id: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true }
             
     }],
-    totalSum: { type: Number, required: true},
+    totalSum:{
+        totalSum: { type: Number, required: true}},
     date: { type: Date, default: Date.now },
 
 });

@@ -8,6 +8,7 @@ import EditProduct from "./components/admin/EditProduct";
 import Product from "./components/Product";
 import StatHome from "./components/stats/StatHome";
 import productService from "./components/services/productService";
+import orderService from "./components/services/orderService";
 import { Switch, Route } from "react-router-dom";
 import Basket from "./components/common/Basket";
 
@@ -66,13 +67,25 @@ const clearBasket = () => {
   setCartItems([]);
 }
 
+const onPay = async (totalSum) => {
+  totalSum = {'totalSum': totalSum};
+  const total = {
+    totalSum,
+                  orderItems:[...cartItems]
+                };
+  await orderService.createOrder(total);
+ //  clearBasket();
+  // setShow(false);
+
+}
+
     return ( 
       <React.Fragment>
       <header>
          <Navbar />
        </header>
        <main >
-        < Basket onAddToCart={onAddToCart} clearBasket={clearBasket} cartItems={cartItems} onRemoveFromCart={onRemoveFromCart} countCartItems={cartItems.length} />
+        < Basket onAddToCart={onAddToCart} onPay={onPay} clearBasket={clearBasket} cartItems={cartItems} onRemoveFromCart={onRemoveFromCart} countCartItems={cartItems.length} />
 
          <Switch >
          <Route exact path="/" render={(props) => <Home products={products} onAddToCart={onAddToCart} {...props} />} />
