@@ -15,7 +15,7 @@ const StatHome = () => {
         setAllStats(data);
       }
       fetchData();
-    }, [] );     
+    }, []);     
   
 
     return ( 
@@ -33,7 +33,7 @@ const StatHome = () => {
                             </div>
                             <ul className="list-group list-group-flush">
 
-                            {/* 
+                            { allStats[0] && (
                                 allStats[0].map((product,index) => (
                                     
                                     <li key={index} className="list-group-item">
@@ -44,9 +44,9 @@ const StatHome = () => {
                                       {  product.total}
                                      </h6>
                                     </li>
-                                ))
+                               ))
                                 
-                                */}
+                             ) }
  
                             </ul>
                         </div>
@@ -62,7 +62,7 @@ const StatHome = () => {
                             </div>
                             <ul className="list-group list-group-flush">
 
-                            { /*
+                            { allStats[0] && (
                                 allStats[0].map((product,index) => (
                                     
                                     <li key={index} className="list-group-item">
@@ -75,7 +75,7 @@ const StatHome = () => {
                                     </li>
                                 ))
                                 
-                                */}
+                             ) }
  
                             </ul>
                         </div>
@@ -92,20 +92,20 @@ const StatHome = () => {
                             </div>
                             <ul className="list-group list-group-flush">
 
-                            { /*
-                                allStats[1].map((product,index) => (
+                            { allStats[1] && (
+                                allStats[1].map((order,index) => (
                                     
                                     <li key={index} className="list-group-item">
-                                     <h6>Title: &nbsp;&nbsp;
-                                        { product.title} 
+                                     <h6>Date: &nbsp;&nbsp;
+                                        { order.date} 
                                      </h6>
-                                     <h6>Total orders: &nbsp;&nbsp;
-                                      {  product.count}
+                                     <h6>Total : &nbsp;&nbsp;
+                                      {  order.totalSum.totalSum  }
                                      </h6>
                                     </li>
                                 ))
                                 
-                                */  }
+                            )}
  
                             </ul>
                         </div>

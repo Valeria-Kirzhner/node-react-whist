@@ -24,21 +24,16 @@ router.get('/top-products', async ( req, res ) => {
                     { $limit : 5 }
                    ]).sort({total :-1});
 
-        const topOrder = await Order.find(
-        {
-            "date": 
-            {
-                $gte: new Date((new Date().getTime() - (5 * 24 * 60 * 60 * 1000)))
-            },
-            
-        },
-        ).sort({ "date": -1 })
+        const topOrder = await Order.aggregate([
+          { '$match': { 'date': { '$gte': new Date((new Date().getTime() - (5 * 24 * 60 * 60 * 1000))) }  } } ,
+          {  $project: { date: { $dateToString: { format: "%d-%m-%Y", date: "$date"  }}, totalSum: 1}}
+                 
+          ]).sort({ "date": -1 })
+
+
 
         newData = [topProduct, topOrder];
-
         res.send(newData);
-        //res.send(topOrder);
-
        
  } catch ( error ) {
      console.error(error);

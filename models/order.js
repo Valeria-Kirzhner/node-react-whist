@@ -16,7 +16,7 @@ const orderSchema = new mongoose.Schema({
     }],
     totalSum:{
         totalSum: { type: Number, required: true}},
-    date: { type: Date, default: Date.now },
+    date: { type: Date, default: Date.now() },
 
 });
 
