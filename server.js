@@ -21,7 +21,7 @@ const whitelist = [
 ];
 
 mongoose
-  .connect(process.env.MONGO_URI || "mongodb+srv://valeria:valeria@whistdb.8lsfw.mongodb.net/whistDB", {
+  .connect(process.env.MONGO_URI || "mongodb://localhost/whistDB", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -30,6 +30,7 @@ mongoose
   
   //app.use(cors());
 
+  app.use(express.static(__dirname));
   app.use(express.json());// make incoming data as json
   app.use(favicon(path.join(__dirname, "client/build", "favicon.ico")));
   app.use(express.static(path.join(__dirname, "client/build")));
