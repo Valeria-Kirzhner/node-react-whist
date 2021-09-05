@@ -1,7 +1,7 @@
 import http from "./httpService";
 
 export function createOrder(orderList) {
-    return http.post("/orders", orderList);
+    return http.post("/api/orders", orderList);
 }
 
 const orderService = {

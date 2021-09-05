@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-axios.defaults.baseURL = "http://localhost:5500/api";
+axios.defaults.baseURL = "";
 
 //this will catch all responses with reject.
 axios.interceptors.response.use(null, (error) => {
