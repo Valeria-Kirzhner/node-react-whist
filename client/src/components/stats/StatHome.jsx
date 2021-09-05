@@ -5,17 +5,14 @@ import PageHeader from "../common/PageHeader";
 
 const StatHome = () => {
 
-    const [ topProducts,setTopProducts] = useState([]);
-  
-
+    const [ allStats,setAllStats] = useState([]);
 
     useEffect(() => {
     
       const fetchData = async () => {
 
         const { data } = await statsService.getStats();
-        if (data.length > 0)  setTopProducts(data);
-
+        setAllStats(data);
       }
       fetchData();
     }, [] );     
@@ -36,8 +33,8 @@ const StatHome = () => {
                             </div>
                             <ul className="list-group list-group-flush">
 
-                            { 
-                                topProducts.map((product,index) => (
+                            {/* 
+                                allStats[0].map((product,index) => (
                                     
                                     <li key={index} className="list-group-item">
                                      <h6>Title: &nbsp;&nbsp;
@@ -49,7 +46,7 @@ const StatHome = () => {
                                     </li>
                                 ))
                                 
-                              }
+                                */}
  
                             </ul>
                         </div>
@@ -65,8 +62,8 @@ const StatHome = () => {
                             </div>
                             <ul className="list-group list-group-flush">
 
-                            { 
-                                topProducts.map((product,index) => (
+                            { /*
+                                allStats[0].map((product,index) => (
                                     
                                     <li key={index} className="list-group-item">
                                      <h6>Title: &nbsp;&nbsp;
@@ -78,7 +75,37 @@ const StatHome = () => {
                                     </li>
                                 ))
                                 
-                              }
+                                */}
+ 
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    {/*last 5 days*/}
+                    <div className="col-md-6 col-lg-4 mt-3">
+                        <div className="card" style={{width: "18rem"}}>
+                            <div className="card-header">
+                                <h5>
+                                Top 5 unique sel
+                                </h5>
+                            </div>
+                            <ul className="list-group list-group-flush">
+
+                            { /*
+                                allStats[1].map((product,index) => (
+                                    
+                                    <li key={index} className="list-group-item">
+                                     <h6>Title: &nbsp;&nbsp;
+                                        { product.title} 
+                                     </h6>
+                                     <h6>Total orders: &nbsp;&nbsp;
+                                      {  product.count}
+                                     </h6>
+                                    </li>
+                                ))
+                                
+                                */  }
  
                             </ul>
                         </div>
