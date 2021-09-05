@@ -7,7 +7,8 @@
     "start": "npm start",
     "server": "nodemon server.js",
     "client": "npm run start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [],
   "author": "",
@@ -19,8 +20,10 @@
     "http": "0.0.1-security",
     "lodash": "^4.17.21",
     "mongoose": "^6.0.2",
+    "path": "^0.12.7",
     "react-router-dom": "^5.2.1",
-    "react-toastify": "^8.0.2"
+    "react-toastify": "^8.0.2",
+    "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
     "concurrently": "^6.2.1",
