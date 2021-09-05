@@ -8,8 +8,9 @@ const mongoose = require('mongoose');
 
 router.get('/top-products', async ( req, res ) => {
   try {
+    newData = []
 
-      const test = await Order.aggregate([
+      const topProduct = await Order.aggregate([
       {
         $unwind: '$orderItems'
       },
@@ -21,9 +22,23 @@ router.get('/top-products', async ( req, res ) => {
                     }
                   },
                     { $limit : 5 }
-                   ]).sort({total :-1})
+                   ]).sort({total :-1});
 
-        res.send(test);
+        const topOrder = await Order.find(
+        {
+            "date": 
+            {
+                $gte: new Date((new Date().getTime() - (5 * 24 * 60 * 60 * 1000)))
+            },
+            
+        },
+        ).sort({ "date": -1 })
+
+        newData = [topProduct, topOrder];
+
+        res.send(newData);
+        //res.send(topOrder);
+
        
  } catch ( error ) {
      console.error(error);
@@ -39,8 +54,9 @@ router.get('/last-orders', async ( req, res ) => {
             "date": 
             {
                 $gte: new Date((new Date().getTime() - (5 * 24 * 60 * 60 * 1000)))
-            }
-        }
+            },
+            
+        },
         ).sort({ "date": -1 })
 
         res.send(test);
