@@ -10,7 +10,6 @@ import StatHome from "./components/stats/StatHome";
 import productService from "./components/services/productService";
 import orderService from "./components/services/orderService";
 import { Switch, Route } from "react-router-dom";
-import Basket from "./components/common/Basket";
 
 
 const App = () => {
@@ -77,10 +76,9 @@ const onPay = async (totalSum) => {
     return ( 
       <React.Fragment>
       <header>
-         <Navbar />
+         <Navbar onAddToCart={onAddToCart} onPay={onPay} cartItems={cartItems} onRemoveFromCart={onRemoveFromCart} countCartItems={cartItems.length} />
        </header>
        <main >
-        < Basket onAddToCart={onAddToCart} onPay={onPay} cartItems={cartItems} onRemoveFromCart={onRemoveFromCart} countCartItems={cartItems.length} />
 
          <Switch >
          <Route exact path="/" render={(props) => <Home products={products} onAddToCart={onAddToCart} {...props} />} />

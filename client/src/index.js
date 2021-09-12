@@ -4,7 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "jquery/dist/jquery";
+import "popper.js/dist/popper";
+import "bootstrap/dist/js/bootstrap";
+import "@fortawesome/fontawesome-free/css/all.css";
+
 
 ReactDOM.render(
   <React.StrictMode>
