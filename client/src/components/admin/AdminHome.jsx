@@ -3,7 +3,7 @@ import PageHeader from "../common/PageHeader";
 import Product from "./AdminProduct";
 import { Link } from "react-router-dom";
 
-const AdminHome = ({ products }) => {
+const AdminHome = ({ products, deleteProductClientSide }) => {
 
     return (
 
@@ -23,6 +23,7 @@ const AdminHome = ({ products }) => {
               <Product
               key={product._id}
               product={product}
+              deleteProductClientSide={deleteProductClientSide}
               />
         ))}
           </div>

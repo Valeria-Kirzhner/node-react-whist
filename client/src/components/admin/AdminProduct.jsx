@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-const AdminProduct = ({ product }) => {
+const AdminProduct = ({ product, deleteProductClientSide }) => {
 
     return ( 
         <div className="container">
@@ -24,7 +24,7 @@ const AdminProduct = ({ product }) => {
       <Link to={`/product/edit/${product._id}`} >
         <button style={{marginRight: 10}} type="button" className="btn btn-outline-primary">Update</button>
       </Link>
-                <button type="button" className="btn btn-outline-danger">Delete</button>
+          <button type="button" onClick={() => deleteProductClientSide(product._id)} className="btn btn-outline-danger">Delete</button>
 
       </td>
     </tr>

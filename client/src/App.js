@@ -73,6 +73,14 @@ const onPay = async (totalSum) => {
   setCartItems([]);
 }
 
+const deleteProductClientSide = async (productId) => {
+
+      let filteredproducts = products.filter((product) => product._id !== productId); // it will return all users cards exept of the card with the cardId.
+      setProducts( filteredproducts );
+      await productService.deleteProduct(productId);
+    }
+
+
     return ( 
       <React.Fragment>
       <header>
@@ -84,7 +92,7 @@ const onPay = async (totalSum) => {
          <Route exact path="/" render={(props) => <Home products={products} onAddToCart={onAddToCart} {...props} />} />
          <Route path="/product/add"render={(props) => <AddProduct addProduct={addProduct} {...props}/>}/>
          <Route exact path="/product" component={Product}/>
-         <Route exact path="/admin" render={(props) => <AdminHome products={products} onAddToCart={onAddToCart} {...props} />} />
+         <Route exact path="/admin" render={(props) => <AdminHome products={products} onAddToCart={onAddToCart} {...props} deleteProductClientSide={deleteProductClientSide} />} />
          <Route exact path="/product/edit/:id" render={(props) => <EditProduct editProduct={editProduct} {...props}/>}  />
          <Route exact path="/stats" component={StatHome} />
          </Switch>
