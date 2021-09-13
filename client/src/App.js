@@ -78,7 +78,7 @@ const onPay = async (totalSum) => {
       <header>
          <Navbar onAddToCart={onAddToCart} onPay={onPay} cartItems={cartItems} onRemoveFromCart={onRemoveFromCart} countCartItems={cartItems.length} />
        </header>
-       <main >
+       <main style={{minHeight: 900}}>
 
          <Switch >
          <Route exact path="/" render={(props) => <Home products={products} onAddToCart={onAddToCart} {...props} />} />
@@ -89,7 +89,13 @@ const onPay = async (totalSum) => {
          <Route exact path="/stats" component={StatHome} />
          </Switch>
        </main>
+       <footer style={{paddingTop: 5}}>
+            <p className="border-top pt-3 text-center" >
+            Whist Cards © {new Date().getFullYear()}
+          </p>
+       </footer>
    </React.Fragment>
+   
 
      );
   }
