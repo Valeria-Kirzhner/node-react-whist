@@ -32,6 +32,21 @@ router.get('/:id', async ( req, res ) => {
     }
 
 }); 
+// delete product
+router.delete("/:id", async (req, res) => {
+  try {
+  const product = await Product.findOneAndRemove({
+    _id: req.params.id,
+  });
+  if (!product)
+    return res.status(404).send("The product with the given ID was not found.");
+  res.send(product);
+} catch (error) {
+  console.error(error);
+  res.status(500).send("Server error");
+}
+});
+
 //edit product
 router.put("/:id", async (req, res) => {
 
