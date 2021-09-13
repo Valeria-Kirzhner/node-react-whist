@@ -4,6 +4,10 @@ export function getProduct(productId) {
     return http.get(`/api/products/${productId}`);
   }
 
+  export function deleteProduct(productId) {
+    return http.delete(`/api/products/${productId}`);
+  }
+
 export function allProducts() {
     return http.get("/api/products/");
 }
@@ -24,7 +28,8 @@ const productService = {
   allProducts,
   createProduct,
   getProduct,
-  updateProduct
+  updateProduct,
+  deleteProduct
 
   };
   
