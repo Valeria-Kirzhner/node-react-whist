@@ -16,46 +16,41 @@ $('#cart').on('hide.bs.dropdown', function (e) {
                        
                         {   show ?
                         <div className="dropdown-menu dropdown-menu-right" style={{width: "18rem" , minHeight: "300px"}}>
-                        <h4 className="" >Cart items </h4>
+                        <h4 className="ml-3" >Cart items </h4>
     
                         <div>{cartItems.length === 0 &&(<div >The cart is empty</div>)}</div>
-
+                            <div className="container">
+                                <div style={{minHeight: 200}}>
                                 { cartItems.map(( item ) => // if cartItems !===0 
-                                    <div key={ item._id } >
-                                        <div className="list-group-item">{item.title}
-                                            <div className="col-md-3 ml-md-auto">
-                                                <button onClick={() => onAddToCart( item ) } className="btn">
-                                                        +
-                                                </button>
-                                                <button onClick={() => onRemoveFromCart( item ) } className="btn">
-                                                        -
-                                                </button>
-                                            </div> 
-                                            <div>{item.qty} X ${item.price}</div>
+                                    <div key={ item._id } style={{minWidth:250}} >
+                                        <div className="list-group-item" >
+                                            {item.title}     
                                         </div>
+                                        <div className="float-right"> 
+                                            <button onClick={() => onAddToCart( item ) } className="btn">+</button>
+                                                <button onClick={() => onRemoveFromCart( item ) } className="btn">-</button>
+                                            </div> 
+                                            <div className="ml-2 mt-2">{item.qty} X ${item.price}</div>
                                     </div>  
                                 )}
+                                </div>
+                                <hr />
                             {cartItems.length !== 0 && (// only if the sum items is greater than 0
-                                <div>
-                                    <hr></hr>
-                                    <div className="row">
-                                        <div className=""><strong>Total price</strong></div>
-                                        <div>${totalSum}</div>
-
+                                <div className="mb-2" style={{ width: 250, position:'relative'}}>
+                                  
+                                        <div className="float" >
+                                        <strong>Total price</strong>${totalSum}
+                                        <div className="float-right">
+                                        <button className="btn btn-primary" onClick={ () => onPay(totalSum) && setShow(false)}>Pay</button>
                                         </div>
-                                    <div className="row" >
-                                        <button onClick={ () => onPay(totalSum) && setShow(false)}>Pay</button>
-
-                                    </div>
+                                        </div>
                              
                                 </div>
-                                
-
                             )}
 
                          </div>                    
 
-
+                         </div>
                     : null  }
             </div>
         );
