@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const productRoutes = require("./routes/products");
 const orderRoutes = require("./routes/orders");
 const statsRoutes = require("./routes/stats");
-const cors = require("cors");
+//const cors = require("cors");
 const path = require("path");
 const favicon = require("serve-favicon");
 
